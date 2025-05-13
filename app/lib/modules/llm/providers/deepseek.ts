@@ -24,7 +24,7 @@ export default class DeepseekProvider extends BaseProvider {
     apiKeys?: Record<string, string>;
     providerSettings?: Record<string, IProviderSetting>;
   }): LanguageModelV1 {
-    const { model, serverEnv, apiKeys, providerSettings } = options;
+    const { _model, serverEnv, apiKeys, providerSettings } = options;
 
     const { apiKey } = this.getProviderBaseUrlAndKey({
       apiKeys,
@@ -42,7 +42,7 @@ export default class DeepseekProvider extends BaseProvider {
       apiKey,
     });
 
-    return deepseek(model, {
+    return deepseek(_model, {
       // simulateStreaming: true,
     });
   }

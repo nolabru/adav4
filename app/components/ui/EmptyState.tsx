@@ -71,7 +71,7 @@ export function EmptyState({
   onAction,
   secondaryActionLabel,
   onSecondaryAction,
-  className,
+  _className,
   variant = 'default',
 }: EmptyStateProps) {
   // Get styles based on variant
@@ -90,7 +90,7 @@ export function EmptyState({
         'text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary-dark',
         'bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-3 rounded-lg',
         styles.container,
-        className,
+        _className,
       )}
     >
       {/* Icon */}

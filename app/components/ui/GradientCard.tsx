@@ -47,7 +47,7 @@ export function GradientCard({
   seed,
   hoverEffect = true,
   borderEffect = true,
-  className,
+  _className,
   children,
   ...props
 }: GradientCardProps) {
@@ -76,7 +76,7 @@ export function GradientCard({
           : '',
         'transition-all duration-300 shadow-sm',
         hoverEffect ? 'hover:shadow-md' : '',
-        className,
+        _className,
       )}
       {...hoverAnimation}
       {...props}

@@ -25,7 +25,7 @@ async function getModelList(options: {
 const logger = createScopedLogger('api.llmcall');
 
 async function llmCallAction({ context, request }: ActionFunctionArgs) {
-  const { system, message, model, provider, streamOutput } = await request.json<{
+  const { system, message, _model, provider, streamOutput } = await request.json<{
     system: string;
     message: string;
     model: string;
@@ -95,7 +95,7 @@ async function llmCallAction({ context, request }: ActionFunctionArgs) {
   } else {
     try {
       const models = await getModelList({ apiKeys, providerSettings, serverEnv: context.cloudflare?.env as any });
-      const modelDetails = models.find((m: ModelInfo) => m.name === model);
+      const modelDetails = models.find((m: ModelInfo) => m.name === _model);
 
       if (!modelDetails) {
         throw new Error('Model not found');

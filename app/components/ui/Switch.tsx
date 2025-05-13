@@ -8,7 +8,7 @@ interface SwitchProps {
   onCheckedChange?: (event: boolean) => void;
 }
 
-export const Switch = memo(({ className, onCheckedChange, checked }: SwitchProps) => {
+export const Switch = memo(({ _className, onCheckedChange, checked }: SwitchProps) => {
   return (
     <SwitchPrimitive.Root
       className={classNames(
@@ -17,7 +17,7 @@ export const Switch = memo(({ className, onCheckedChange, checked }: SwitchProps
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2',
         'disabled:cursor-not-allowed disabled:opacity-50',
         'data-[state=checked]:bg-bolt-elements-item-contentAccent',
-        className,
+        _className,
       )}
       checked={checked}
       onCheckedChange={(e) => onCheckedChange?.(e)}

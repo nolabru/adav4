@@ -12,18 +12,11 @@ interface ImportFolderButtonProps {
   importChat?: (description: string, messages: Message[]) => Promise<void>;
 }
 
-export const ImportFolderButton: React.FC<ImportFolderButtonProps> = ({ className, importChat }) => {
+export const ImportFolderButton: React.FC<ImportFolderButtonProps> = ({ _className, importChat }) => {
   // Return empty elements instead of null to maintain component structure
   return (
     <>
-      <input
-        type="file"
-        id="folder-import"
-        className="hidden"
-        webkitdirectory=""
-        directory=""
-        {...({} as any)}
-      />
+      <input type="file" id="folder-import" className="hidden" webkitdirectory="" directory="" {...({} as any)} />
       {/* Button removed but component structure maintained */}
     </>
   );

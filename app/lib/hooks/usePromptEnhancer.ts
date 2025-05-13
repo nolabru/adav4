@@ -25,7 +25,7 @@ export function usePromptEnhancer() {
 
     const requestBody: any = {
       message: input,
-      model,
+      _model,
       provider,
     };
 

@@ -24,7 +24,7 @@ export const TabTile: React.FC<TabTileProps> = ({
   statusMessage,
   description,
   isLoading,
-  className,
+  _className,
   children,
 }: TabTileProps) => {
   return (

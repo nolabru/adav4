@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as React from "react"
-import { useEffect, useState } from "react";
- 
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+
 export interface TypewriterProps {
   text: string | string[];
   speed?: number;
@@ -12,28 +12,30 @@ export interface TypewriterProps {
   delay?: number;
   className?: string;
 }
- 
+
 export function Typewriter({
   text,
   speed = 100,
-  cursor = "|",
+  cursor = '|',
   loop = false,
   deleteSpeed = 50,
   delay = 1500,
-  className,
+  _className,
 }: TypewriterProps) {
-  const [displayText, setDisplayText] = useState("");
+  const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [textArrayIndex, setTextArrayIndex] = useState(0);
- 
+
   // Validate and process input text
   const textArray = Array.isArray(text) ? text : [text];
-  const currentText = textArray[textArrayIndex] || "";
- 
+  const currentText = textArray[textArrayIndex] || '';
+
   useEffect(() => {
-    if (!currentText) return;
- 
+    if (!currentText) {
+      return;
+    }
+
     const timeout = setTimeout(
       () => {
         if (!isDeleting) {
@@ -55,20 +57,10 @@ export function Typewriter({
       },
       isDeleting ? deleteSpeed : speed,
     );
- 
+
     return () => clearTimeout(timeout);
-  }, [
-    currentIndex,
-    isDeleting,
-    currentText,
-    loop,
-    speed,
-    deleteSpeed,
-    delay,
-    displayText,
-    text,
-  ]);
- 
+  }, [currentIndex, isDeleting, currentText, loop, speed, deleteSpeed, delay, displayText, text]);
+
   return (
     <span className={className}>
       {displayText}

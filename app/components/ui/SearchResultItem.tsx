@@ -34,14 +34,14 @@ export function SearchResultItem({
   actionLabel,
   onAction,
   onClick,
-  className,
+  _className,
 }: SearchResultItemProps) {
   return (
     <motion.div
       className={classNames(
         'p-5 rounded-xl border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark hover:border-purple-500/40 transition-all duration-300 shadow-sm hover:shadow-md bg-bolt-elements-background-depth-1/50 dark:bg-bolt-elements-background-depth-3/50',
         onClick ? 'cursor-pointer' : '',
-        className,
+        _className,
       )}
       whileHover={{
         scale: 1.01,

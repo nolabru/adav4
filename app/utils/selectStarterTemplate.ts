@@ -81,10 +81,10 @@ const parseSelectedTemplate = (llmOutput: string): { template: string; title: st
 };
 
 export const selectStarterTemplate = async (options: { message: string; model: string; provider: ProviderInfo }) => {
-  const { message, model, provider } = options;
+  const { message, _model, provider } = options;
   const requestBody = {
     message,
-    model,
+    _model,
     provider,
     system: starterTemplateSelectionPrompt(templates),
   };

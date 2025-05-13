@@ -107,7 +107,7 @@ export default class OpenRouterProvider extends BaseProvider {
     apiKeys?: Record<string, string>;
     providerSettings?: Record<string, IProviderSetting>;
   }): LanguageModelV1 {
-    const { model, serverEnv, apiKeys, providerSettings } = options;
+    const { _model, serverEnv, apiKeys, providerSettings } = options;
 
     const { apiKey } = this.getProviderBaseUrlAndKey({
       apiKeys,
@@ -124,7 +124,7 @@ export default class OpenRouterProvider extends BaseProvider {
     const openRouter = createOpenRouter({
       apiKey,
     });
-    const instance = openRouter.chat(model) as LanguageModelV1;
+    const instance = openRouter.chat(_model) as LanguageModelV1;
 
     return instance;
   }

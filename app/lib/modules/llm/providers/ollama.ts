@@ -128,7 +128,7 @@ export default class OllamaProvider extends BaseProvider {
 
     logger.debug('Ollama Base Url used: ', baseUrl);
 
-    const ollamaInstance = ollama(model, {
+    const ollamaInstance = ollama(_model, {
       numCtx: this.getDefaultNumCtx(serverEnv),
     }) as LanguageModelV1 & { config: any };
 

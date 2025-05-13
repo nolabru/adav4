@@ -54,7 +54,7 @@ export function GitUrlImport() {
       try {
         const { workdir, data } = await gitClone(repoUrl);
 
-        if (importChat) {
+        if (_importChat) {
           const filePaths = Object.keys(data).filter((filePath) => !ig.ignores(filePath));
           const textDecoder = new TextDecoder('utf-8');
 

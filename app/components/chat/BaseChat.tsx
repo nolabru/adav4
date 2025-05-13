@@ -94,10 +94,10 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       chatStarted = false,
       isStreaming = false,
       onStreamingChange,
-      model,
-      setModel,
+      _model,
+      _setModel,
       provider,
-      setProvider,
+      _setProvider,
       providerList,
       input = '',
       enhancingPrompt,
@@ -105,9 +105,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
 
       // promptEnhanced,
       enhancePrompt,
-      sendMessage,
+      _sendMessage,
       handleStop,
-      importChat,
+      _importChat,
       exportChat,
       uploadedFiles = [],
       setUploadedFiles,
@@ -238,7 +238,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
 
       // Only update models for the specific provider
       setModelList((prevModels) => {
-        const otherModels = prevModels.filter((model) => model.provider !== providerName);
+        const otherModels = prevModels.filter((_model) => model.provider !== providerName);
         return [...otherModels, ...providerModels];
       });
       setIsModelLoading(undefined);
@@ -259,7 +259,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     };
 
     const handleSendMessage = (event: React.UIEvent, messageInput?: string) => {
-      if (sendMessage) {
+      if (_sendMessage) {
         sendMessage(event, messageInput);
 
         if (recognition) {
@@ -343,13 +343,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               <div id="intro" className="mt-[16vh] mb-22 max-w-chat mx-auto text-center px-4 lg:px-0">
                 <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
                   <SequentialGooeyText
-                    texts={[
-                      "Imagine",
-                      "Create",
-                      "Dream",
-                      "Design",
-                      "Build"
-                    ]}
+                    texts={['Imagine', 'Create', 'Dream', 'Design', 'Build']}
                     morphTime={3}
                     cooldownTime={3}
                   />
@@ -557,7 +551,13 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                     {input.length === 0 && (
                       <div className="absolute top-4 left-4 pointer-events-none">
                         <Typewriter
-                          text={["Imagine something amazing...", "Create something new...", "Dream big...", "Design the future...", "Build something incredible..."]}
+                          text={[
+                            'Imagine something amazing...',
+                            'Create something new...',
+                            'Dream big...',
+                            'Design the future...',
+                            'Build something incredible...',
+                          ]}
                           speed={80}
                           deleteSpeed={40}
                           delay={2000}

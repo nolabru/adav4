@@ -45,7 +45,7 @@ export function TabsWithSlider({
   tabs,
   activeTab,
   onChange,
-  className,
+  _className,
   tabClassName,
   activeTabClassName,
   sliderClassName,
@@ -73,7 +73,7 @@ export function TabsWithSlider({
   }, [activeTab, tabs]);
 
   return (
-    <div className={classNames('relative flex gap-2', className)}>
+    <div className={classNames('relative flex gap-2', _className)}>
       {/* Tab buttons */}
       {tabs.map((tab, index) => (
         <button

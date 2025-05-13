@@ -46,7 +46,7 @@ export const FileTree = memo(
     collapsed = false,
     allowFolderSelection = false,
     hiddenFiles,
-    className,
+    _className,
     unsavedFiles,
     fileHistory = {},
   }: Props) => {
@@ -143,7 +143,7 @@ export const FileTree = memo(
     };
 
     return (
-      <div className={classNames('text-sm', className, 'overflow-y-auto modern-scrollbar')}>
+      <div className={classNames('text-sm', _className, 'overflow-y-auto modern-scrollbar')}>
         {filteredFileList.map((fileOrFolder) => {
           switch (fileOrFolder.kind) {
             case 'file': {
@@ -732,12 +732,12 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-function NodeButton({ depth, iconClasses, onClick, className, children }: ButtonProps) {
+function NodeButton({ depth, iconClasses, onClick, _className, children }: ButtonProps) {
   return (
     <button
       className={classNames(
         'flex items-center gap-1.5 w-full pr-2 border-2 border-transparent text-faded py-0.5',
-        className,
+        _className,
       )}
       style={{ paddingLeft: `${6 + depth * NODE_PADDING_LEFT}px` }}
       onClick={() => onClick?.()}

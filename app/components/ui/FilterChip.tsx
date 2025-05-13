@@ -48,7 +48,7 @@ export function FilterChip({ label, value, onRemove, active = false, icon, class
           ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/30'
           : 'bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-3 text-bolt-elements-textSecondary dark:text-bolt-elements-textSecondary-dark border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark',
         onRemove && 'pr-1',
-        className,
+        _className,
       )}
     >
       {/* Icon */}

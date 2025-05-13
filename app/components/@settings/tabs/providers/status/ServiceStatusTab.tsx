@@ -326,10 +326,10 @@ const ServiceStatusTab = () => {
         if (Array.isArray(data)) {
           models = data.map((model: { id?: string; name?: string }) => model.id || model.name || '');
         } else if (data.data && Array.isArray(data.data)) {
-          models = data.data.map((model) => model.id || model.name || '');
+          models = data.data.map((_model) => model.id || model.name || '');
         } else if (data.models && Array.isArray(data.models)) {
-          models = data.models.map((model) => model.id || model.name || '');
-        } else if (data.model) {
+          models = data.models.map((_model) => model.id || model.name || '');
+        } else if (data._model) {
           // Some providers return single model info
           models = [data.model];
         }

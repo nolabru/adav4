@@ -342,5 +342,5 @@ export function FileIcon({ filename, size = 'md', className }: FileIconProps) {
   const color = getIconColorForExtension(extension);
   const sizeClass = getSizeClass(size);
 
-  return <span className={classNames(icon, color, sizeClass, className)} />;
+  return <span className={classNames(icon, color, sizeClass, _className)} />;
 }

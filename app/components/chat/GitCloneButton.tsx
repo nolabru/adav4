@@ -42,11 +42,7 @@ interface GitCloneButtonProps {
   importChat?: (description: string, messages: Message[], metadata?: IChatMetadata) => Promise<void>;
 }
 
-export default function GitCloneButton({ importChat, className }: GitCloneButtonProps) {
+export default function GitCloneButton({ _importChat, className }: GitCloneButtonProps) {
   // Return an empty fragment instead of null to maintain component structure
-  return (
-    <>
-      {/* Button removed but component structure maintained */}
-    </>
-  );
+  return <>{/* Button removed but component structure maintained */}</>;
 }

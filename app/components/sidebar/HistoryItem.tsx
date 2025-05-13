@@ -162,7 +162,7 @@ const ChatActionButton = forwardRef(
     {
       toolTipContent,
       icon,
-      className,
+      _className,
       onClick,
     }: {
       toolTipContent: string;

@@ -38,7 +38,7 @@ const logger = createScopedLogger('Chat');
 export function Chat() {
   renderLogger.trace('Chat');
 
-  const { ready, initialMessages, storeMessageHistory, importChat, exportChat } = useChatHistory();
+  const { ready, initialMessages, storeMessageHistory, _importChat, exportChat } = useChatHistory();
   const title = useStore(description);
   useEffect(() => {
     workbenchStore.setReloadedMessages(initialMessages.map((m) => m.id));
@@ -114,7 +114,7 @@ interface ChatProps {
 }
 
 export const ChatImpl = memo(
-  ({ description, initialMessages, storeMessageHistory, importChat, exportChat }: ChatProps) => {
+  ({ description, initialMessages, storeMessageHistory, _importChat, exportChat }: ChatProps) => {
     useShortcuts();
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -133,7 +133,7 @@ export const ChatImpl = memo(
     const supabaseAlert = useStore(workbenchStore.supabaseAlert);
     const { activeProviders, promptId, autoSelectTemplate, contextOptimizationEnabled } = useSettings();
 
-    const [model, setModel] = useState(() => {
+    const [_model, setModel] = useState(() => {
       const savedModel = Cookies.get('selectedModel');
       return savedModel || DEFAULT_MODEL;
     });
@@ -198,7 +198,7 @@ export const ChatImpl = memo(
           logStore.logProvider('Chat response completed', {
             component: 'Chat',
             action: 'response',
-            model,
+            _model,
             provider: provider.name,
             usage,
             messageLength: message.content.length,
@@ -213,7 +213,7 @@ export const ChatImpl = memo(
     useEffect(() => {
       const prompt = searchParams.get('prompt');
 
-      // console.log(prompt, searchParams, model, provider);
+      // console.log(prompt, searchParams, _model, provider);
 
       if (prompt) {
         setSearchParams({});
@@ -228,7 +228,7 @@ export const ChatImpl = memo(
           ] as any, // Type assertion to bypass compiler check
         });
       }
-    }, [model, provider, searchParams]);
+    }, [_model, provider, searchParams]);
 
     const { enhancingPrompt, promptEnhanced, enhancePrompt, resetEnhancer } = usePromptEnhancer();
     const { parsedMessages, parseMessages } = useMessageParser();
@@ -265,7 +265,7 @@ export const ChatImpl = memo(
       logStore.logProvider('Chat response aborted', {
         component: 'Chat',
         action: 'abort',
-        model,
+        _model,
         provider: provider.name,
       });
     };
@@ -321,7 +321,7 @@ export const ChatImpl = memo(
         if (autoSelectTemplate) {
           const { template, title } = await selectStarterTemplate({
             message: finalMessageContent,
-            model,
+            _model,
             provider,
           });
 
@@ -548,7 +548,7 @@ export const ChatImpl = memo(
               setInput(input);
               scrollTextArea();
             },
-            model,
+            _model,
             provider,
             apiKeys,
           );

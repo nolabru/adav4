@@ -10,7 +10,7 @@ interface PanelHeaderButtonProps {
 }
 
 export const PanelHeaderButton = memo(
-  ({ className, disabledClassName, disabled = false, children, onClick }: PanelHeaderButtonProps) => {
+  ({ _className, disabledClassName, disabled = false, children, onClick }: PanelHeaderButtonProps) => {
     return (
       <button
         className={classNames(
@@ -18,7 +18,7 @@ export const PanelHeaderButton = memo(
           {
             [classNames('opacity-30', disabledClassName)]: disabled,
           },
-          className,
+          _className,
         )}
         disabled={disabled}
         onClick={(event) => {

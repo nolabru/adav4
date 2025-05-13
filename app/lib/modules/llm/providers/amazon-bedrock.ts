@@ -97,7 +97,7 @@ export default class AmazonBedrockProvider extends BaseProvider {
     apiKeys?: Record<string, string>;
     providerSettings?: Record<string, IProviderSetting>;
   }): LanguageModelV1 {
-    const { model, serverEnv, apiKeys, providerSettings } = options;
+    const { _model, serverEnv, apiKeys, providerSettings } = options;
 
     const { apiKey } = this.getProviderBaseUrlAndKey({
       apiKeys,
@@ -114,6 +114,6 @@ export default class AmazonBedrockProvider extends BaseProvider {
     const config = this._parseAndValidateConfig(apiKey);
     const bedrock = createAmazonBedrock(config);
 
-    return bedrock(model);
+    return bedrock(_model);
   }
 }

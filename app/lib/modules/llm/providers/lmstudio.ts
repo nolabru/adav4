@@ -49,7 +49,7 @@ export default class LMStudioProvider extends BaseProvider {
     const response = await fetch(`${baseUrl}/v1/models`);
     const data = (await response.json()) as { data: Array<{ id: string }> };
 
-    return data.data.map((model) => ({
+    return data.data.map((_model) => ({
       name: model.id,
       label: model.id,
       provider: this.name,
@@ -89,6 +89,6 @@ export default class LMStudioProvider extends BaseProvider {
       apiKey: '',
     });
 
-    return lmstudio(model);
+    return lmstudio(_model);
   };
 }
