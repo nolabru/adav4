@@ -67,7 +67,7 @@ export function StatusIndicator({ status, size = 'md', pulse = false, label, cla
   const textSizeClass = TEXT_SIZE_CLASSES[size];
 
   return (
-    <div className={classNames('flex items-center gap-2', _className)}>
+    <div className={classNames('flex items-center gap-2', className)}>
       {/* Status indicator dot */}
       <span className={classNames('rounded-full relative', colorClass, sizeClass)}>
         {/* Pulse animation */}

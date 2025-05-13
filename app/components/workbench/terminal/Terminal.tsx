@@ -23,7 +23,7 @@ export interface TerminalProps {
 
 export const Terminal = memo(
   forwardRef<TerminalRef, TerminalProps>(
-    ({ _className, theme, readonly, id, onTerminalReady, onTerminalResize }, ref) => {
+    ({ className, theme, readonly, id, onTerminalReady, onTerminalResize }, ref) => {
       const terminalElementRef = useRef<HTMLDivElement>(null);
       const terminalRef = useRef<XTerm>();
 

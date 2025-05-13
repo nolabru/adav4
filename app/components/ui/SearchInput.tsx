@@ -27,7 +27,7 @@ interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
  */
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   (
-    { _className, onClear, showClearButton = true, iconClassName, containerClassName, loading = false, ...props },
+    { className, onClear, showClearButton = true, iconClassName, containerClassName, loading = false, ...props },
     ref,
   ) => {
     const hasValue = Boolean(props.value);
@@ -51,7 +51,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         {/* Input field */}
         <Input
           ref={ref}
-          className={classNames('pl-10', hasValue && showClearButton ? 'pr-10' : '', _className)}
+          className={classNames('pl-10', hasValue && showClearButton ? 'pr-10' : '', className)}
           {...props}
         />
 

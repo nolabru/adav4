@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Message } from 'ai';
-import { toast } from 'react-toastify';
-import { MAX_FILES, isBinaryFile, shouldIncludeFile } from '~/utils/fileUtils';
-import { createChatFromFolder } from '~/utils/folderImport';
-import { logStore } from '~/lib/stores/logs'; // Assuming logStore is imported from this location
-import { Button } from '~/components/ui/Button';
-import { classNames } from '~/utils/classNames';
 
 interface ImportFolderButtonProps {
-  className?: string;
-  importChat?: (description: string, messages: Message[]) => Promise<void>;
+  _className?: string;
+  _importChat?: (description: string, messages: Message[]) => Promise<void>;
 }
 
-export const ImportFolderButton: React.FC<ImportFolderButtonProps> = ({ _className, importChat }) => {
+export const ImportFolderButton: React.FC<ImportFolderButtonProps> = ({ _className, _importChat }) => {
   // Return empty elements instead of null to maintain component structure
   return (
     <>

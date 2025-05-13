@@ -76,7 +76,7 @@ export default class TogetherProvider extends BaseProvider {
     apiKeys?: Record<string, string>;
     providerSettings?: Record<string, IProviderSetting>;
   }): LanguageModelV1 {
-    const { _model, serverEnv, apiKeys, providerSettings } = options;
+    const { model, serverEnv, apiKeys, providerSettings } = options;
 
     const { baseUrl, apiKey } = this.getProviderBaseUrlAndKey({
       apiKeys,
@@ -90,6 +90,6 @@ export default class TogetherProvider extends BaseProvider {
       throw new Error(`Missing configuration for ${this.name} provider`);
     }
 
-    return getOpenAILikeModel(baseUrl, apiKey, _model);
+    return getOpenAILikeModel(baseUrl, apiKey, model);
   }
 }

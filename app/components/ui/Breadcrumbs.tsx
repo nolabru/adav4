@@ -19,7 +19,7 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({
   items,
-  _className,
+  className,
   separator = 'i-ph:caret-right',
   maxItems = 0,
   renderItem,
@@ -76,7 +76,7 @@ export function Breadcrumbs({
   };
 
   return (
-    <nav className={classNames('flex items-center', _className)} aria-label="Breadcrumbs">
+    <nav className={classNames('flex items-center', className)} aria-label="Breadcrumbs">
       <ol className="flex items-center gap-1.5">
         {displayItems.map((item, index) => {
           const isLast = index === displayItems.length - 1;

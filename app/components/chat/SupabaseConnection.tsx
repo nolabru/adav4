@@ -329,7 +329,7 @@ function Button({ active = false, disabled = false, children, onClick, className
           'bg-bolt-elements-item-backgroundDefault text-alpha-gray-20 dark:text-alpha-white-20 cursor-not-allowed':
             disabled,
         },
-        _className,
+        className,
       )}
       onClick={onClick}
     >

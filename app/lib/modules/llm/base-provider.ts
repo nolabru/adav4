@@ -125,5 +125,5 @@ export function getOpenAILikeModel(baseURL: string, apiKey: OptionalApiKey, mode
     apiKey,
   });
 
-  return openai(_model);
+  return openai(model);
 }

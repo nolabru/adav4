@@ -163,12 +163,12 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
 
       // Update models with installed versions
       setModels((prevModels) =>
-        prevModels.map((_model) => {
+        prevModels.map((model) => {
           const installed = installedModels.find((m) => m.name.toLowerCase() === model.name.toLowerCase());
 
           if (installed) {
             return {
-              ..._model,
+              ...model,
               installedVersion: installed.digest.substring(0, 8),
               needsUpdate: installed.digest !== installed.latest,
               latestVersion: installed.latest?.substring(0, 8),
@@ -202,7 +202,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
     }
   };
 
-  const filteredModels = models.filter((_model) => {
+  const filteredModels = models.filter((model) => {
     const matchesSearch =
       searchQuery === '' ||
       model.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -379,7 +379,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
     }
   };
 
-  const allTags = Array.from(new Set(POPULAR_MODELS.flatMap((_model) => model.tags)));
+  const allTags = Array.from(new Set(POPULAR_MODELS.flatMap((model) => model.tags)));
 
   return (
     <div className="space-y-6">
@@ -497,7 +497,7 @@ export default function OllamaModelInstaller({ onModelInstalled }: OllamaModelIn
       </div>
 
       <div className="grid grid-cols-1 gap-2">
-        {filteredModels.map((_model) => (
+        {filteredModels.map((model) => (
           <motion.div
             key={model.name}
             className={classNames(

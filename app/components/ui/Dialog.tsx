@@ -37,10 +37,10 @@ export const DialogButton = memo(({ type, children, onClick, disabled }: DialogB
   );
 });
 
-export const DialogTitle = memo(({ _className, children, ...props }: RadixDialog.DialogTitleProps) => {
+export const DialogTitle = memo(({ className, children, ...props }: RadixDialog.DialogTitleProps) => {
   return (
     <RadixDialog.Title
-      className={classNames('text-lg font-medium text-bolt-elements-textPrimary flex items-center gap-2', _className)}
+      className={classNames('text-lg font-medium text-bolt-elements-textPrimary flex items-center gap-2', className)}
       {...props}
     >
       {children}
@@ -48,10 +48,10 @@ export const DialogTitle = memo(({ _className, children, ...props }: RadixDialog
   );
 });
 
-export const DialogDescription = memo(({ _className, children, ...props }: RadixDialog.DialogDescriptionProps) => {
+export const DialogDescription = memo(({ className, children, ...props }: RadixDialog.DialogDescriptionProps) => {
   return (
     <RadixDialog.Description
-      className={classNames('text-sm text-bolt-elements-textSecondary mt-1', _className)}
+      className={classNames('text-sm text-bolt-elements-textSecondary mt-1', className)}
       {...props}
     >
       {children}
@@ -100,7 +100,7 @@ interface DialogProps {
   onBackdrop?: () => void;
 }
 
-export const Dialog = memo(({ children, _className, showCloseButton = true, onClose, onBackdrop }: DialogProps) => {
+export const Dialog = memo(({ children, className, showCloseButton = true, onClose, onBackdrop }: DialogProps) => {
   return (
     <RadixDialog.Portal>
       <RadixDialog.Overlay asChild>
@@ -117,7 +117,7 @@ export const Dialog = memo(({ children, _className, showCloseButton = true, onCl
         <motion.div
           className={classNames(
             'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-950 rounded-lg shadow-xl border border-bolt-elements-borderColor z-[9999] w-[520px] focus:outline-none',
-            _className,
+            className,
           )}
           initial="closed"
           animate="open"

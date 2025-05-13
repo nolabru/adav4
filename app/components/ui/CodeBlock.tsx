@@ -22,7 +22,7 @@ export function CodeBlock({
   showLineNumbers = true,
   highlightLines = [],
   maxHeight = '400px',
-  _className,
+  className,
   onCopy,
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
@@ -41,7 +41,7 @@ export function CodeBlock({
       className={classNames(
         'rounded-lg overflow-hidden border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark',
         'bg-bolt-elements-background-depth-2 dark:bg-bolt-elements-background-depth-3',
-        _className,
+        className,
       )}
     >
       {/* Header */}

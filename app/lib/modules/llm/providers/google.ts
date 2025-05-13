@@ -69,7 +69,7 @@ export default class GoogleProvider extends BaseProvider {
     apiKeys?: Record<string, string>;
     providerSettings?: Record<string, IProviderSetting>;
   }): LanguageModelV1 {
-    const { _model, serverEnv, apiKeys, providerSettings } = options;
+    const { model, serverEnv, apiKeys, providerSettings } = options;
 
     const { apiKey } = this.getProviderBaseUrlAndKey({
       apiKeys,
@@ -87,6 +87,6 @@ export default class GoogleProvider extends BaseProvider {
       apiKey,
     });
 
-    return google(_model);
+    return google(model);
   }
 }

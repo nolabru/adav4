@@ -22,7 +22,7 @@ export const Markdown = memo(({ children, html = false, limitedMarkdown = false 
 
   const components = useMemo(() => {
     return {
-      div: ({ _className, children, node, ...props }) => {
+      div: ({ className, children, node, ...props }) => {
         if (className?.includes('__boltArtifact__')) {
           const messageId = node?.properties.dataMessageId as string;
 
@@ -54,8 +54,8 @@ export const Markdown = memo(({ children, html = false, limitedMarkdown = false 
           firstChild.tagName === 'code' &&
           firstChild.children[0].type === 'text'
         ) {
-          const { _className, ...rest } = firstChild.properties;
-          const [, language = 'plaintext'] = /language-(\w+)/.exec(String(_className) || '') ?? [];
+          const { className, ...rest } = firstChild.properties;
+          const [, language = 'plaintext'] = /language-(\w+)/.exec(String(className) || '') ?? [];
 
           return <CodeBlock code={firstChild.children[0].value} language={language as BundledLanguage} {...rest} />;
         }

@@ -133,8 +133,8 @@ export default defineConfig((config) => {
         transform(code, id) {
           if (id.includes('istextorbinary')) {
             return {
-              code: `import { isText, isBinary } from '${join(process.cwd(), 'app/utils/textBinary.js').replace(/\\/g, '/')}';
-export { isText, isBinary };`,
+              code: `import { isText, isBinary, getEncoding } from '${join(process.cwd(), 'app/utils/textBinary.ts').replace(/\\/g, '/')}';
+export { isText, isBinary, getEncoding };`,
               map: null,
             };
           }

@@ -1491,7 +1491,7 @@ export default function DebugTab() {
                 </div>
                 <div className="overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 dark:hover:scrollbar-thumb-gray-600">
                   <div className="grid grid-cols-2 gap-3 pr-2">
-                    {ollamaStatus.models.map((_model) => (
+                    {ollamaStatus.models.map((model) => (
                       <div
                         key={model.name}
                         className="text-sm bg-bolt-elements-background-depth-3 hover:bg-bolt-elements-background-depth-4 rounded-lg px-4 py-3 flex items-center justify-between transition-colors group"

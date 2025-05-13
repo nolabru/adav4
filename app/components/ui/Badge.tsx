@@ -41,9 +41,9 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement>, Varian
   icon?: string;
 }
 
-function Badge({ _className, variant, size, icon, children, ...props }: BadgeProps) {
+function Badge({ className, variant, size, icon, children, ...props }: BadgeProps) {
   return (
-    <div className={classNames(badgeVariants({ variant, size }), _className)} {...props}>
+    <div className={classNames(badgeVariants({ variant, size }), className)} {...props}>
       {icon && <span className={icon} />}
       {children}
     </div>

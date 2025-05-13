@@ -6,13 +6,13 @@ interface SeparatorProps {
   orientation?: 'horizontal' | 'vertical';
 }
 
-export const Separator = ({ _className, orientation = 'horizontal' }: SeparatorProps) => {
+export const Separator = ({ className, orientation = 'horizontal' }: SeparatorProps) => {
   return (
     <SeparatorPrimitive.Root
       className={classNames(
         'bg-bolt-elements-borderColor',
         orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
-        _className,
+        className,
       )}
       orientation={orientation}
     />

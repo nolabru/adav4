@@ -21,7 +21,7 @@ export async function createSummary(props: {
   let currentProvider = DEFAULT_PROVIDER.name;
   const processedMessages = messages.map((message) => {
     if (message.role === 'user') {
-      const { _model, provider, content } = extractPropertiesFromMessage(message);
+      const { model, provider, content } = extractPropertiesFromMessage(message);
       currentModel = model;
       currentProvider = provider;
 

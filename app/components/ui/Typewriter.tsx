@@ -20,7 +20,7 @@ export function Typewriter({
   loop = false,
   deleteSpeed = 50,
   delay = 1500,
-  _className,
+  className,
 }: TypewriterProps) {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,12 +31,16 @@ export function Typewriter({
   const textArray = Array.isArray(text) ? text : [text];
   const currentText = textArray[textArrayIndex] || '';
 
+  // Store timeout ID in a ref
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Main effect for typewriter animation
   useEffect(() => {
     if (!currentText) {
       return;
     }
 
-    const timeout = setTimeout(
+    timeoutRef.current = setTimeout(
       () => {
         if (!isDeleting) {
           if (currentIndex < currentText.length) {
@@ -57,9 +61,17 @@ export function Typewriter({
       },
       isDeleting ? deleteSpeed : speed,
     );
-
-    return () => clearTimeout(timeout);
   }, [currentIndex, isDeleting, currentText, loop, speed, deleteSpeed, delay, displayText, text]);
+
+  // Separate cleanup effect
+  useEffect(() => {
+    // This effect is only for cleanup
+    return () => {
+      if (timeoutRef.current !== null) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <span className={className}>

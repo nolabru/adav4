@@ -38,7 +38,7 @@ const logger = createScopedLogger('Chat');
 export function Chat() {
   renderLogger.trace('Chat');
 
-  const { ready, initialMessages, storeMessageHistory, _importChat, exportChat } = useChatHistory();
+  const { ready, initialMessages, storeMessageHistory, importChat, exportChat } = useChatHistory();
   const title = useStore(description);
   useEffect(() => {
     workbenchStore.setReloadedMessages(initialMessages.map((m) => m.id));
@@ -52,7 +52,7 @@ export function Chat() {
           initialMessages={initialMessages}
           exportChat={exportChat}
           storeMessageHistory={storeMessageHistory}
-          importChat={importChat}
+          _importChat={importChat}
         />
       )}
       <ToastContainer
@@ -108,7 +108,7 @@ const processSampledMessages = createSampler(
 interface ChatProps {
   initialMessages: Message[];
   storeMessageHistory: (messages: Message[]) => Promise<void>;
-  importChat: (description: string, messages: Message[]) => Promise<void>;
+  _importChat: (description: string, messages: Message[]) => Promise<void>;
   exportChat: () => void;
   description?: string;
 }
@@ -133,7 +133,7 @@ export const ChatImpl = memo(
     const supabaseAlert = useStore(workbenchStore.supabaseAlert);
     const { activeProviders, promptId, autoSelectTemplate, contextOptimizationEnabled } = useSettings();
 
-    const [_model, setModel] = useState(() => {
+    const [model, setModel] = useState(() => {
       const savedModel = Cookies.get('selectedModel');
       return savedModel || DEFAULT_MODEL;
     });
@@ -198,7 +198,7 @@ export const ChatImpl = memo(
           logStore.logProvider('Chat response completed', {
             component: 'Chat',
             action: 'response',
-            _model,
+            model,
             provider: provider.name,
             usage,
             messageLength: message.content.length,
@@ -213,7 +213,7 @@ export const ChatImpl = memo(
     useEffect(() => {
       const prompt = searchParams.get('prompt');
 
-      // console.log(prompt, searchParams, _model, provider);
+      // console.log(prompt, searchParams, model, provider);
 
       if (prompt) {
         setSearchParams({});
@@ -228,7 +228,7 @@ export const ChatImpl = memo(
           ] as any, // Type assertion to bypass compiler check
         });
       }
-    }, [_model, provider, searchParams]);
+    }, [model, provider, searchParams]);
 
     const { enhancingPrompt, promptEnhanced, enhancePrompt, resetEnhancer } = usePromptEnhancer();
     const { parsedMessages, parseMessages } = useMessageParser();
@@ -265,7 +265,7 @@ export const ChatImpl = memo(
       logStore.logProvider('Chat response aborted', {
         component: 'Chat',
         action: 'abort',
-        _model,
+        model,
         provider: provider.name,
       });
     };
@@ -321,7 +321,7 @@ export const ChatImpl = memo(
         if (autoSelectTemplate) {
           const { template, title } = await selectStarterTemplate({
             message: finalMessageContent,
-            _model,
+            model,
             provider,
           });
 
@@ -518,10 +518,10 @@ export const ChatImpl = memo(
         enhancingPrompt={enhancingPrompt}
         promptEnhanced={promptEnhanced}
         sendMessage={sendMessage}
-        model={model}
-        setModel={handleModelChange}
+        _model={model}
+        _setModel={handleModelChange}
         provider={provider}
-        setProvider={handleProviderChange}
+        _setProvider={handleProviderChange}
         providerList={activeProviders}
         handleInputChange={(e) => {
           onTextareaChange(e);
@@ -529,7 +529,7 @@ export const ChatImpl = memo(
         }}
         handleStop={abort}
         description={description}
-        importChat={importChat}
+        _importChat={_importChat}
         exportChat={exportChat}
         messages={messages.map((message, i) => {
           if (message.role === 'user') {
@@ -548,7 +548,7 @@ export const ChatImpl = memo(
               setInput(input);
               scrollTextArea();
             },
-            _model,
+            model,
             provider,
             apiKeys,
           );

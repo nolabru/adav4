@@ -41,7 +41,7 @@ export function extractPropertiesFromMessage(message: Omit<Message, 'id'>): {
       })
     : textContent.replace(MODEL_REGEX, '').replace(PROVIDER_REGEX, '');
 
-  return { _model, provider, content: cleanedContent };
+  return { model, provider, content: cleanedContent };
 }
 
 export function simplifyBoltActions(input: string): string {

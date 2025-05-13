@@ -15,11 +15,11 @@ interface RepositoryStatsProps {
   compact?: boolean;
 }
 
-export function RepositoryStats({ stats, _className, compact = false }: RepositoryStatsProps) {
+export function RepositoryStats({ stats, className, compact = false }: RepositoryStatsProps) {
   const { totalFiles, totalSize, languages, hasPackageJson, hasDependencies } = stats;
 
   return (
-    <div className={classNames('space-y-3', _className)}>
+    <div className={classNames('space-y-3', className)}>
       {!compact && (
         <p className="text-sm font-medium text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary-dark">
           Repository Statistics:

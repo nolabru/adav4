@@ -31,7 +31,7 @@ export default class CohereProvider extends BaseProvider {
     apiKeys?: Record<string, string>;
     providerSettings?: Record<string, IProviderSetting>;
   }): LanguageModelV1 {
-    const { _model, serverEnv, apiKeys, providerSettings } = options;
+    const { model, serverEnv, apiKeys, providerSettings } = options;
 
     const { apiKey } = this.getProviderBaseUrlAndKey({
       apiKeys,
@@ -49,6 +49,6 @@ export default class CohereProvider extends BaseProvider {
       apiKey,
     });
 
-    return cohere(_model);
+    return cohere(model);
   }
 }

@@ -157,8 +157,8 @@ export default function LocalProvidersTab() {
       const data = (await response.json()) as { models: OllamaModel[] };
 
       setOllamaModels(
-        data.models.map((_model) => ({
-          ..._model,
+        data.models.map((model) => ({
+          ...model,
           status: 'idle' as const,
         })),
       );
@@ -325,7 +325,7 @@ export default function LocalProvidersTab() {
 
   // Update model actions to not use Tooltip
   const ModelActions = ({
-    _model,
+    model,
     onUpdate,
     onDelete,
   }: {
@@ -574,7 +574,7 @@ export default function LocalProvidersTab() {
                         </p>
                       </div>
                     ) : (
-                      ollamaModels.map((_model) => (
+                      ollamaModels.map((model) => (
                         <motion.div
                           key={model.name}
                           className={classNames(

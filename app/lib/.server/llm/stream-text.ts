@@ -53,7 +53,7 @@ export async function streamText(props: {
   let currentProvider = DEFAULT_PROVIDER.name;
   let processedMessages = messages.map((message) => {
     if (message.role === 'user') {
-      const { _model, provider, content } = extractPropertiesFromMessage(message);
+      const { model, provider, content } = extractPropertiesFromMessage(message);
       currentModel = model;
       currentProvider = provider;
 

@@ -14,7 +14,7 @@ interface CloseButtonProps {
  * A button with an X icon used for closing dialogs, modals, etc.
  * The button has a transparent background and only shows a background on hover.
  */
-export function CloseButton({ onClick, _className, size = 'md' }: CloseButtonProps) {
+export function CloseButton({ onClick, className, size = 'md' }: CloseButtonProps) {
   const sizeClasses = {
     sm: 'p-1',
     md: 'p-2',
@@ -37,7 +37,7 @@ export function CloseButton({ onClick, _className, size = 'md' }: CloseButtonPro
         'transition-colors duration-200',
         'focus:outline-none focus:ring-2 focus:ring-purple-500/50',
         sizeClasses[size],
-        _className,
+        className,
       )}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}

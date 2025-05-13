@@ -32,7 +32,7 @@ export const IconButton = memo(
       {
         icon,
         size = 'xl',
-        _className,
+        className,
         iconClassName,
         disabledClassName,
         disabled = false,
@@ -50,7 +50,7 @@ export const IconButton = memo(
             {
               [classNames('opacity-30', disabledClassName)]: disabled,
             },
-            _className,
+            className,
           )}
           title={title}
           disabled={disabled}

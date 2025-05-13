@@ -96,7 +96,7 @@ export function Tooltip({
   side = 'top',
   align = 'center',
   delayDuration = 300,
-  _className,
+  className,
 }: TooltipProps) {
   return (
     <TooltipPrimitive.Provider>
@@ -107,7 +107,7 @@ export function Tooltip({
           align={align}
           className={classNames(
             'z-50 overflow-hidden rounded-md bg-bolt-elements-background-depth-3 dark:bg-bolt-elements-background-depth-4 px-3 py-1.5 text-xs text-bolt-elements-textPrimary dark:text-bolt-elements-textPrimary-dark shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-            _className,
+            className,
           )}
           sideOffset={5}
         >

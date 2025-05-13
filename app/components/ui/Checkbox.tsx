@@ -6,7 +6,7 @@ import { classNames } from '~/utils/classNames';
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ _className, ...props }, ref) => (
+>(({ className, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
     className={classNames(
@@ -18,7 +18,7 @@ const Checkbox = React.forwardRef<
       'data-[state=checked]:bg-purple-500 dark:data-[state=checked]:bg-purple-500',
       'data-[state=checked]:border-purple-500 dark:data-[state=checked]:border-purple-500',
       'data-[state=checked]:text-white',
-      _className,
+      className,
     )}
     {...props}
   >

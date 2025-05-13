@@ -1,5 +1,24 @@
 // Browser-compatible wrapper for istextorbinary
-export function isText(buffer: string | ArrayBuffer | Uint8Array): boolean {
+export interface EncodingOpts {
+  /** Defaults to 24 */
+  chunkLength?: number;
+
+  /** If not provided, will check the start, beginning, and end */
+  chunkBegin?: number;
+}
+
+export function getEncoding(buffer: Buffer | null, _opts?: EncodingOpts): 'utf8' | 'binary' | null {
+  if (!buffer) {
+    return null;
+  }
+
+  // Convert Buffer to Uint8Array for browser compatibility
+  const uint8Array = new Uint8Array(buffer);
+
+  return isText(uint8Array) ? 'utf8' : 'binary';
+}
+
+export function isText(buffer: any): boolean {
   // Simple implementation that works in browser
   if (typeof buffer === 'string') {
     return true;
@@ -25,6 +44,6 @@ export function isText(buffer: string | ArrayBuffer | Uint8Array): boolean {
   return true;
 }
 
-export function isBinary(buffer: string | ArrayBuffer | Uint8Array): boolean {
+export function isBinary(buffer: any): boolean {
   return !isText(buffer);
 }

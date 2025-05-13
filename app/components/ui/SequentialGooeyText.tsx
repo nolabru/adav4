@@ -15,7 +15,7 @@ export function SequentialGooeyText({
   texts,
   morphTime = 1,
   cooldownTime = 0.25,
-  _className,
+  className,
   textClassName,
 }: SequentialGooeyTextProps) {
   const text1Ref = React.useRef<HTMLSpanElement>(null);
@@ -23,6 +23,10 @@ export function SequentialGooeyText({
   const indexRef = React.useRef<number>(0);
   const nextIndexRef = React.useRef<number>(1);
 
+  // Store animation frame ID in a ref
+  const animationFrameIdRef = React.useRef<number | null>(null);
+
+  // Main effect for animation
   React.useEffect(() => {
     if (texts.length === 0) {
       return;
@@ -31,7 +35,6 @@ export function SequentialGooeyText({
     let time = new Date();
     let morph = 0;
     let cooldown = cooldownTime;
-    let animationFrameId: number;
 
     // Initialize text elements
     if (text1Ref.current && text2Ref.current) {
@@ -103,19 +106,24 @@ export function SequentialGooeyText({
         doCooldown();
       }
 
-      animationFrameId = requestAnimationFrame(animate);
+      animationFrameIdRef.current = requestAnimationFrame(animate);
     }
 
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      // Cleanup function
-      cancelAnimationFrame(animationFrameId);
-    };
+    animationFrameIdRef.current = requestAnimationFrame(animate);
   }, [texts, morphTime, cooldownTime]);
 
+  // Separate cleanup effect
+  React.useEffect(() => {
+    // This effect is only for cleanup
+    return () => {
+      if (animationFrameIdRef.current !== null) {
+        cancelAnimationFrame(animationFrameIdRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className={classNames('relative', _className)}>
+    <div className={classNames('relative', className)}>
       <svg className="absolute h-0 w-0" aria-hidden="true" focusable="false">
         <defs>
           <filter id="threshold">

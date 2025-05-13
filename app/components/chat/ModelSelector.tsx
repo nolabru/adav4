@@ -16,10 +16,10 @@ interface ModelSelectorProps {
 }
 
 export const ModelSelector = ({
-  _model,
-  _setModel,
+  model,
+  setModel,
   provider,
-  _setProvider,
+  setProvider,
   modelList,
   providerList,
   modelLoading,
@@ -58,7 +58,7 @@ export const ModelSelector = ({
   const filteredModels = [...modelList]
     .filter((e) => e.provider === provider?.name && e.name)
     .filter(
-      (_model) =>
+      (model) =>
         model.label.toLowerCase().includes(modelSearchQuery.toLowerCase()) ||
         model.name.toLowerCase().includes(modelSearchQuery.toLowerCase()),
     );
@@ -146,12 +146,12 @@ export const ModelSelector = ({
         if (focusedProviderIndex >= 0 && focusedProviderIndex < filteredProviders.length) {
           const selectedProvider = filteredProviders[focusedProviderIndex];
 
-          if (_setProvider) {
+          if (setProvider) {
             setProvider(selectedProvider);
 
             const firstModel = modelList.find((m) => m.provider === selectedProvider.name);
 
-            if (firstModel && _setModel) {
+            if (firstModel && setModel) {
               setModel(firstModel.name);
             }
           }
@@ -202,7 +202,7 @@ export const ModelSelector = ({
         setModel?.(firstModel.name);
       }
     }
-  }, [providerList, provider, _setProvider, modelList, setModel]);
+  }, [providerList, provider, setProvider, modelList, setModel]);
 
   if (providerList.length === 0) {
     return (
@@ -320,12 +320,12 @@ export const ModelSelector = ({
                     onClick={(e) => {
                       e.stopPropagation();
 
-                      if (_setProvider) {
+                      if (setProvider) {
                         setProvider(providerOption);
 
                         const firstModel = modelList.find((m) => m.provider === providerOption.name);
 
-                        if (firstModel && _setModel) {
+                        if (firstModel && setModel) {
                           setModel(firstModel.name);
                         }
                       }
@@ -368,7 +368,7 @@ export const ModelSelector = ({
           tabIndex={0}
         >
           <div className="flex items-center justify-between">
-            <div className="truncate">{modelList.find((m) => m.name === _model)?.label || 'Select model'}</div>
+            <div className="truncate">{modelList.find((m) => m.name === model)?.label || 'Select model'}</div>
             <div
               className={classNames(
                 'i-ph:caret-down w-4 h-4 text-bolt-elements-textSecondary opacity-75',
