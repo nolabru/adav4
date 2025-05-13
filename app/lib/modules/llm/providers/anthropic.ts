@@ -23,13 +23,13 @@ export default class AnthropicProvider extends BaseProvider {
       name: 'claude-3-5-sonnet-latest',
       label: 'Claude 3.5 Sonnet (new)',
       provider: 'Anthropic',
-      maxTokenAllowed: 8000,
+      maxTokenAllowed: 8192,
     },
     {
       name: 'claude-3-5-sonnet-20240620',
       label: 'Claude 3.5 Sonnet (old)',
       provider: 'Anthropic',
-      maxTokenAllowed: 8000,
+      maxTokenAllowed: 8192,
     },
     {
       name: 'claude-3-5-haiku-latest',
@@ -75,7 +75,7 @@ export default class AnthropicProvider extends BaseProvider {
       name: m.id,
       label: `${m.display_name}`,
       provider: this.name,
-      maxTokenAllowed: 32000,
+      maxTokenAllowed: 8000, // Set to a safe value that works with all Anthropic models
     }));
   }
 

@@ -93,18 +93,54 @@ export default defineConfig((config) => {
     },
     build: {
       target: 'esnext',
+      sourcemap: process.env.NODE_ENV === 'development',
+      chunkSizeWarningLimit: 2000,
+      rollupOptions: {
+        external: ['istextorbinary'],
+        output: {
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              // Group large dependencies into separate chunks
+              if (id.includes('@codemirror')) return 'vendor-codemirror';
+              if (id.includes('react')) return 'vendor-react';
+              if (id.includes('@radix-ui')) return 'vendor-radix';
+              if (id.includes('lucide-react')) return 'vendor-lucide';
+              if (id.includes('framer-motion')) return 'vendor-framer';
+              return 'vendor';
+            }
+          },
+        },
+      },
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        sourcemap: process.env.NODE_ENV === 'development',
+      },
     },
     plugins: [
       nodePolyfills({
-        include: ['buffer', 'process', 'util', 'stream'],
+        include: ['buffer', 'process', 'util', 'stream', 'path'],
         globals: {
           Buffer: true,
           process: true,
           global: true,
         },
         protocolImports: true,
-        exclude: ['child_process', 'fs', 'path'],
+        exclude: ['child_process', 'fs'],
       }),
+      {
+        name: 'istextorbinary-patch',
+        transform(code, id) {
+          if (id.includes('istextorbinary')) {
+            return {
+              code: `import { isText, isBinary } from '${join(process.cwd(), 'app/utils/textBinary.js').replace(/\\/g, '/')}';
+export { isText, isBinary };`,
+              map: null,
+            };
+          }
+          return null;
+        },
+      },
       {
         name: 'buffer-polyfill',
         transform(code, id) {

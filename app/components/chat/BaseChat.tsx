@@ -7,6 +7,8 @@ import React, { type RefCallback, useEffect, useState } from 'react';
 import { ClientOnly } from 'remix-utils/client-only';
 import { Menu } from '~/components/sidebar/Menu.client';
 import { IconButton } from '~/components/ui/IconButton';
+import { SequentialGooeyText } from '~/components/ui/SequentialGooeyText';
+import { Typewriter } from '~/components/ui/Typewriter';
 import { Workbench } from '~/components/workbench/Workbench.client';
 import { classNames } from '~/utils/classNames';
 import { PROVIDER_LIST } from '~/utils/constants';
@@ -338,13 +340,20 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
         <div className="flex flex-col lg:flex-row overflow-y-auto w-full h-full">
           <div className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}>
             {!chatStarted && (
-              <div id="intro" className="mt-[16vh] max-w-chat mx-auto text-center px-4 lg:px-0">
+              <div id="intro" className="mt-[16vh] mb-22 max-w-chat mx-auto text-center px-4 lg:px-0">
                 <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
-                  Where ideas begin
+                  <SequentialGooeyText
+                    texts={[
+                      "Imagine",
+                      "Create",
+                      "Dream",
+                      "Design",
+                      "Build"
+                    ]}
+                    morphTime={3}
+                    cooldownTime={3}
+                  />
                 </h1>
-                <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">
-                  Bring ideas to life in seconds or get help on existing projects.
-                </p>
               </div>
             )}
             <StickToBottom
@@ -447,28 +456,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                     <ClientOnly>
                       {() => (
                         <div className={isModelSettingsCollapsed ? 'hidden' : ''}>
-                          <ModelSelector
-                            key={provider?.name + ':' + modelList.length}
-                            model={model}
-                            setModel={setModel}
-                            modelList={modelList}
-                            provider={provider}
-                            setProvider={setProvider}
-                            providerList={providerList || (PROVIDER_LIST as ProviderInfo[])}
-                            apiKeys={apiKeys}
-                            modelLoading={isModelLoading}
-                          />
-                          {(providerList || []).length > 0 &&
-                            provider &&
-                            (!LOCAL_PROVIDERS.includes(provider.name) || 'OpenAILike') && (
-                              <APIKeyManager
-                                provider={provider}
-                                apiKey={apiKeys[provider.name] || ''}
-                                setApiKey={(key) => {
-                                  onApiKeysChange(provider.name, key);
-                                }}
-                              />
-                            )}
+                          {/* Model selector and API key manager removed */}
                         </div>
                       )}
                     </ClientOnly>
@@ -563,9 +551,21 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                         minHeight: TEXTAREA_MIN_HEIGHT,
                         maxHeight: TEXTAREA_MAX_HEIGHT,
                       }}
-                      placeholder="How can Bolt help you today?"
+                      placeholder=""
                       translate="no"
                     />
+                    {input.length === 0 && (
+                      <div className="absolute top-4 left-4 pointer-events-none">
+                        <Typewriter
+                          text={["Imagine something amazing...", "Create something new...", "Dream big...", "Design the future...", "Build something incredible..."]}
+                          speed={80}
+                          deleteSpeed={40}
+                          delay={2000}
+                          loop={true}
+                          className="text-bolt-elements-textTertiary text-sm"
+                        />
+                      </div>
+                    )}
                     <ClientOnly>
                       {() => (
                         <SendButton
@@ -613,20 +613,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                           disabled={isStreaming}
                         />
                         {chatStarted && <ClientOnly>{() => <ExportChatButton exportChat={exportChat} />}</ClientOnly>}
-                        <IconButton
-                          title="Model Settings"
-                          className={classNames('transition-all flex items-center gap-1', {
-                            'bg-bolt-elements-item-backgroundAccent text-bolt-elements-item-contentAccent':
-                              isModelSettingsCollapsed,
-                            'bg-bolt-elements-item-backgroundDefault text-bolt-elements-item-contentDefault':
-                              !isModelSettingsCollapsed,
-                          })}
-                          onClick={() => setIsModelSettingsCollapsed(!isModelSettingsCollapsed)}
-                          disabled={!providerList || providerList.length === 0}
-                        >
-                          <div className={`i-ph:caret-${isModelSettingsCollapsed ? 'right' : 'down'} text-lg`} />
-                          {isModelSettingsCollapsed ? <span className="text-xs">{model}</span> : <span />}
-                        </IconButton>
+                        {/* Model settings button removed */}
                       </div>
                       {input.length > 3 ? (
                         <div className="text-xs text-bolt-elements-textTertiary">
@@ -643,12 +630,6 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               </div>
             </StickToBottom>
             <div className="flex flex-col justify-center">
-              {!chatStarted && (
-                <div className="flex justify-center gap-2">
-                  {ImportButtons(importChat)}
-                  <GitCloneButton importChat={importChat} />
-                </div>
-              )}
               <div className="flex flex-col gap-5">
                 {!chatStarted &&
                   ExamplePrompts((event, messageInput) => {

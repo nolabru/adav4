@@ -31,7 +31,7 @@ export default class OpenRouterProvider extends BaseProvider {
       name: 'anthropic/claude-3.5-sonnet',
       label: 'Anthropic: Claude 3.5 Sonnet (OpenRouter)',
       provider: 'OpenRouter',
-      maxTokenAllowed: 8000,
+      maxTokenAllowed: 8192,
     },
     {
       name: 'anthropic/claude-3-haiku',

@@ -24,7 +24,7 @@ export default class AmazonBedrockProvider extends BaseProvider {
       name: 'anthropic.claude-3-5-sonnet-20241022-v2:0',
       label: 'Claude 3.5 Sonnet v2 (Bedrock)',
       provider: 'AmazonBedrock',
-      maxTokenAllowed: 200000,
+      maxTokenAllowed: 8192,
     },
     {
       name: 'anthropic.claude-3-5-sonnet-20240620-v1:0',
